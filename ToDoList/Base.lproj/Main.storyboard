@@ -203,19 +203,19 @@
                                 <rect key="frame" x="15" y="233.5" width="345" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUX-SS-eXT">
-                                        <rect key="frame" x="25" y="30" width="80" height="29"/>
+                                        <rect key="frame" x="25" y="30" width="79.5" height="29"/>
                                         <fontDescription key="fontDescription" name="Assistant-Bold" family="Assistant" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Theme" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mTX-JM-9Qn">
-                                        <rect key="frame" x="25" y="79" width="68" height="19"/>
+                                        <rect key="frame" x="25" y="79" width="67.5" height="18.5"/>
                                         <fontDescription key="fontDescription" name="Assistant-SemiBold" family="Assistant" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="k4R-al-cbr">
-                                        <rect key="frame" x="25" y="108" width="295" height="32"/>
+                                        <rect key="frame" x="25" y="107.5" width="295" height="32"/>
                                         <segments>
                                             <segment title="" image="sun.min.fill" catalog="system"/>
                                             <segment title="" image="moon" catalog="system"/>
@@ -265,6 +265,7 @@
                     <connections>
                         <outlet property="appThemeLabel" destination="mTX-JM-9Qn" id="yAd-nd-tHR"/>
                         <outlet property="modalView" destination="f3h-SE-ddk" id="lM1-kJ-9Tr"/>
+                        <outlet property="segmentedControl" destination="k4R-al-cbr" id="5e6-BO-aZN"/>
                         <outlet property="settingsTitleLabel" destination="cUX-SS-eXT" id="Fj5-cl-89M"/>
                     </connections>
                 </viewController>
