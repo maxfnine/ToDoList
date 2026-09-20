@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import os
 
 class NewTaskModalView: UIView {
 
@@ -84,23 +85,28 @@ class NewTaskModalView: UIView {
     }
 
     @IBAction func submitButtonTapped(_ sender: UIButton) {
+        os_log("Task creation started. Submit button tapped.",type: .info)
+     
         guard let caption = descriptionTextView.text,
               descriptionTextView.textColor != UIColor.placeholderText,
               caption.count>=4 && caption.count <= 150 else {
             delegate?.presentErrorAlert(title: "Caption Error", message: "You need to provide a description with 4 characters or more")
             return
         }
+        os_log("Validation of task succeed",type: .info)
         let selectedRow = categoryPickerView.selectedRow(inComponent: 0)
         let category = Category.allCases[selectedRow]
         if let task = task{
             let editedTask = Task(id: task.id, category: category, caption: caption, date: task.date, isComplete: task.isComplete)
             let userInfo:[String:Task] = ["updateTask":editedTask]
             NotificationCenter.default.post(name: NSNotification.Name("derevyan.arkadiy.editTask"), object: nil, userInfo: userInfo)
+            os_log("existing task updated notification",type: .info)
         }else{
             let taskId = UUID().uuidString
             let newTask = Task(id:taskId,category: category, caption: caption, date: Date(), isComplete: false)
             let userInfo:[String:Task] = ["newTask":newTask]
             NotificationCenter.default.post(name: NSNotification.Name("derevyan.arkadiy.createTask"), object: nil, userInfo: userInfo)
+            os_log("new task created notification",type: .info)
         }
         delegate?.closeView()
     }

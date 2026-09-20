@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import os
 /// The main screen of the application. This is where see all the tasks and this is starting point for adding new tasks.
 class HomeViewController: UIViewController {
 
@@ -121,6 +122,8 @@ class HomeViewController: UIViewController {
      */
     @objc
     func createTask(_ notification: Notification) {
+    
+        os_log("Task received by notification observer",type: .info)
         guard let userInfo = notification.userInfo,
             let task = userInfo["newTask"] as? Task
         else {
@@ -129,6 +132,7 @@ class HomeViewController: UIViewController {
 
         tasks.append(task)
         tableView.reloadData()
+        os_log("Task successfully created.",type: .info)
     }
 
     override func viewDidLayoutSubviews() {
