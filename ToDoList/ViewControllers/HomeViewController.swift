@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+/// The main screen of the application. This is where see all the tasks and this is starting point for adding new tasks.
 class HomeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -53,6 +53,12 @@ class HomeViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupNotifications()
+        setupView()
+
+    }
+    
+    private func setupView(){
         titleView.clipsToBounds = true
         titleView.layer.cornerRadius = 24
         titleView.layer.maskedCorners = [
@@ -65,6 +71,11 @@ class HomeViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
 
         view.addSubview(addButton)
+        
+    }
+    
+    /// We setup obserevers for notification when new task created or existing edited
+    private func setupNotifications(){
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(createTask(_:)),
@@ -77,9 +88,13 @@ class HomeViewController: UIViewController {
             name: NSNotification.Name("derevyan.arkadiy.editTask"),
             object: nil
         )
-
     }
 
+    /**
+     This responds to task that has been edited from the NewTaskViewController
+            - Parameters:
+                - notification: The notification object from the derevyan.arkadiy.editTask
+     */
     @objc
     func editTask(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
@@ -99,6 +114,11 @@ class HomeViewController: UIViewController {
 
     }
 
+    /**
+     This responds to task that has been created from the NewTaskViewController
+            - Parameters:
+                - notification: The notification object from the derevyan.arkadiy.createTask
+     */
     @objc
     func createTask(_ notification: Notification) {
         guard let userInfo = notification.userInfo,
@@ -133,6 +153,7 @@ class HomeViewController: UIViewController {
     }
 }
 
+//MARK: - Methods conforming to UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)
         -> Int
@@ -162,7 +183,7 @@ extension HomeViewController: UITableViewDataSource {
 
 }
 
-
+//MARK: - Methods conforming to TaskTableViewCellDelegate
 extension HomeViewController: TaskTableViewCellDelegate {
     func editTask(id: String) {
         guard let task = tasks.first(where: { $0.id == id }) else {

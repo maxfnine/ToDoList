@@ -7,11 +7,20 @@
 
 import UIKit
 
+//TODO: - Move to separate protocols file
+/**NewTaskDelegate link links the NewTaskViewController and the NewTaskModalView. This helps the NewTaskViewController when to dismiss and present alert.
+ */
 protocol NewTaskDelegate:AnyObject {
+    /// Dismiss new task modal view
     func closeView()
+    
+    /**
+     This method shows alert if invalid data is entered by user.
+     */
     func presentErrorAlert(title:String,message:String)
 }
 
+/// This class is responsible for creation of the new task
 class NewTaskViewController: UIViewController {
     lazy var modalView: NewTaskModalView = {
         let modalWidth: CGFloat = view.frame.width - CGFloat(30)

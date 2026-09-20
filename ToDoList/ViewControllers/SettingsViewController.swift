@@ -7,16 +7,25 @@
 
 import UIKit
 
+/// This allows user to change settings. The only setting available is select light or dark mode for the interface.
 class SettingsViewController: UIViewController {
 
     @IBOutlet weak var appThemeLabel: UILabel!
     @IBOutlet weak var settingsTitleLabel: UILabel!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var modalView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupView()
+        
+    }
+    
+    private func setupView(){
         settingsTitleLabel.font = UIFont.style(.h1)
         appThemeLabel.font = UIFont.style(.secondaryText)
+        
+        //Dependinf on current interface style we change the settings segmented view to reflect it.
         let window = UIApplication.shared.connectedScenes.flatMap { ($0 as? UIWindowScene)?.windows ?? [] }.first { $0.isKeyWindow
         }
         
@@ -32,7 +41,6 @@ class SettingsViewController: UIViewController {
                 segmentedControl.selectedSegmentIndex = 2
             }
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
